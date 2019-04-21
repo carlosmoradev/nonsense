@@ -4,7 +4,9 @@ GIT definitivamente es una herramienta vital para todos los procesos relacionado
 
 A medida que vamos avanzando en nuestro proceso, encontramos que pueden presentarse nuevas necesidades, como el caso de necesitar conectarnos a diferentes repositorios con diferentes usuarios.
 
-Personalmente experimenté esta situación hace poco cuando en un curso de desarrollo de la universidad nos solicitaron gestionar un repositorio dedicado exclusivamente a los proyectos del mismo. En la actualidad experimiento una necesidad similar, debido a que necesito separar mis proyectos personales de los laborales.
+Personalmente experimenté esta situación hace poco cuando en un curso de desarrollo de la universidad nos solicitaron gestionar un repositorio en GitHub dedicado exclusivamente a los proyectos del mismo. Para conectarme a dicho repositorio debia usar un usuario distinto al que ya tenia, pues el proceso requeria evidenciar el ciclo completo de desarrollo, partiendo desde la creación del usuario en GitHub. 
+
+En la actualidad experimiento una necesidad similar, debido a que necesito separar mis proyectos personales de los laborales.
 
 Para lograr esto, simplemente se requiere crear llaves rsa separadas para autenticar cada usuario segun el servidor git al que se desee conectar.  En este documento se realizará el procedimiento para conectarse a repositorios de GitHub y GitLab, con llaves rsa distintas para cada caso.
 
