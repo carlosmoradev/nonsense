@@ -43,7 +43,9 @@ En este paso simplemente mostraré el proceso de creación de las llaves.  La pr
 
 La salida del comando indica que el directorio del usuario se crearon las llaves privada (id_rsa) y pública (id_rsa.pub), la cual es **la única** que se debe compartir (por eso es pública).
 
+Teniendo la llave predeterminada creada, que es la que se usara para los proyectos personales, se procede a crear la segunda llave para los proyectos laborales (o para cualquier otro proyecto que requiera autenticación con otro usuario).
 
+En el ejemplo que se presenta a continuación, se debe prestar mucha atención a la primera y tercera linea, ya que son las que definen la información de esta segunda llave.
 
 ```bash
 
@@ -70,10 +72,31 @@ La salida del comando indica que el directorio del usuario se crearon las llaves
     +----[SHA256]-----+
 
 ```
+A diferencia del primer proceso para la generación de la llave, en este segundo proceso se agrega el parámetro "-C" (Mayúscula), con el cual se agrega un comentario para la llave generada; en este ejemplo se agregó una cuenta de correo.
 
-### 2. Agregar las llaves SSH a cada servicio GIT al que se desea conectar.
+La tercera linea es la que define en donde se van a almacenar localmentes las llaves pública y privada generadas.  Por defecto se intenta usar la ruta predeterminada, y es por eso que en este paso es **necesario declarar con que nombre se van a guardar estas segundas llaves**.
 
-### 3. Crear un archivo de configuración para SSH.
+### 2. Crear un archivo de configuración para SSH.
+
+Ya teniendo las llaves creadas es necesario indicarle a SSH como las va a administrar para cada plataforma de desarrollo a la que se va a comectar.  En este ejemplo se conectará la cuenta predeterminada a GitHub y la segunda cuenta a GitLab.  Esta información se administra desde el archivo ```~/.ssh/config``` (El directorio ssh del usuario).
+
+```bash
+Host github.com
+    Hostname github.com
+    User git
+    IdentityFile /home/personalUser/.ssh/id_rsa
+
+Host gitlab.com-workAccount
+    Hostname gitlab.com
+    IdentityFile /home/personalUser/.ssh/id_rsa-workAccount
+
+```
+> Nota:
+> Normalmente no es necesario declarar la conexión cuando se usa la llave predeterminada del usuario.  En este caso se declaró la llave predeterminada para usarla en GitHub simplemente con fines didácticos.  Lo normal y recomendado es solo declarar en ese archivo config las llaves distintas a la predeterminada.
+
+### 3. Agregar las llaves SSH a cada servicio GIT al que se desea conectar.
+
+
 
 ### 4. Clonar el repositorio para que se autentique según el usuario requerido.
 
