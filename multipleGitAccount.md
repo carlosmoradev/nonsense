@@ -106,4 +106,52 @@ Hay muchos más parámetros interesantes para este archivo, por lo cual recomien
 
 ### 3. Agregar las llaves públicas a cada servicio GIT al que se desea conectar
 
+Ya teniendo las diferentes lllaves públicas que se desean usar en servicio GIT.  En este punto simplemente se necesita acceder a la cuenta de GitHub y agregar la primera llave por la opción __Settings / SSH and GPG keys__.  Luego se ingresa a GitLab y se agrega la segunda llave pública creada (***id_rsa-workAccount.pub***) usando la opción __Settings / SSH Keys__ del perfil de usuario.
+
+> En este documento se asume que el usuario ya tiene las cuentas creadas en las plataformas requeridas.
+
 ### 4. Clonar el repositorio para que se autentique según el usuario requerido
+
+Es en el proceso de clonación del repositorio donde se manifiesta la *magia* de usar múltiples llaves.  El repositorio de la primera cuenta se clona de la manera tradicional:
+
+```bash
+
+    git clone  git@github.com:gitHubUser/awsomeRepo.git
+
+```
+
+Al momento de clonar el segundo repositorio, es necesario editar la ruta usada para declarar que se va a usar la segunda llave.
+
+Suponiendo que la ruta de descarga del segundo proyecto sea:
+
+```bash
+
+git@gitlab.com:company/latestWorkingProject.git
+
+```
+
+Se  edita la dirección del servidor (gitlab.com) por la ruta declarada en el archivo _~/.ssh/config_  para el uso de la segunda llave (***gitlab.com-workAccount***).
+
+```bash
+
+git clone git@gitlab.com-workAccount:company/latestWorkingProject.git
+
+```
+
+### 5. Información de usuario para el segundo repositorio
+
+Con el objetivo de no usar la información global del usuario en el segundo repositorio, se sobreescriben los datos de usuario para que sean consecuentes con la información personal con la que desea registrar sus interacciones con el repositorio.
+
+Lograr esto simplemente se ingresa al proyecto local y se declaran los datos básicos que desea usar para ese repositorio.
+
+```bash
+
+cd latestWorkingProject
+git config user.name "First Name Last Name"
+git config user.email "user@companydomain.net"
+
+```
+
+Con estos cinco sencillos pasos ya puedes trabajar con diferentes orígenes GIT con diferentes usuarios.
+
+Una salida rápida pudo haber sido crear localmente un segundo usuario local para manejar los desarrollos separados, pero ya es cuestión de gustos.  Personalmente prefiero tener todo gestionado desde mi único usuario local. Además, comenté que en la universidad me solicitaron usuario exclusivo para los proyectos, asi que ya tres cuentas locales se comienza a hacer algo tedioso.
